@@ -1,0 +1,111 @@
+Here is your complete image compression tool in a single, combined HTML file. You can copy and use this as a standalone .html file:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Compress your images quickly and efficiently with our free online image compression tool. Choose your compression level and optimize images for web use.">
+  <meta name="keywords" content="image compression, online image optimizer, compress images, reduce image size">
+  <meta name="author" content="YourSiteName">
+  <title>Online Image Compression Tool</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body { padding: 20px; }
+    .compressor-container { max-width: 600px; margin: auto; }
+    .preview { max-width: 100%; height: auto; margin-top: 15px; }
+    .ad-space { border: 1px dashed #ccc; padding: 10px; text-align: center; margin: 20px 0; }
+  </style>
+</head>
+<body>
+  <div class="container compressor-container">
+    <h1 class="text-center">Image Compression Tool</h1>
+    <p class="text-center">Upload your image and select the compression level to reduce its size.</p>
+
+    <!-- AdSense Ad Unit Top -->
+    <div class="ad-space">
+      <!-- Replace with your AdSense Ad Unit Code -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXX"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+
+    <input type="file" id="imageInput" class="form-control" accept="image/*" />
+    <label for="compressionRange" class="form-label mt-3">Compression Level: <span id="compressionValue">0.7</span></label>
+    <input type="range" class="form-range" min="0.1" max="1" step="0.1" value="0.7" id="compressionRange">
+
+    <button class="btn btn-primary mt-3" onclick="compressImage()">Compress</button>
+
+    <canvas id="canvas" style="display: none;"></canvas>
+    <img id="preview" class="preview mt-3" />
+
+    <a id="downloadLink" class="btn btn-success mt-3 d-none" download="compressed-image.jpg">Download Compressed Image</a>
+
+    <!-- AdSense Ad Unit Bottom -->
+    <div class="ad-space">
+      <!-- Replace with your AdSense Ad Unit Code -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXX"
+           data-ad-slot="0987654321"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+  </div>
+
+  <script>
+    const compressionRange = document.getElementById('compressionRange');
+    const compressionValue = document.getElementById('compressionValue');
+    const imageInput = document.getElementById('imageInput');
+    const canvas = document.getElementById('canvas');
+    const preview = document.getElementById('preview');
+    const downloadLink = document.getElementById('downloadLink');
+
+    compressionRange.addEventListener('input', () => {
+      compressionValue.textContent = compressionRange.value;
+    });
+
+    function compressImage() {
+      const file = imageInput.files[0];
+      if (!file) return alert("Please upload an image.");
+
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = () => {
+          const ctx = canvas.getContext('2d');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+          const quality = parseFloat(compressionRange.value);
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+          preview.src = compressedDataUrl;
+          preview.style.display = 'block';
+
+          downloadLink.href = compressedDataUrl;
+          downloadLink.classList.remove('d-none');
+        }
+      }
+    }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</body>
+</html>
+
+Make sure to:
+
+Replace the data-ad-client and data-ad-slot values with your actual Google AdSense account and unit IDs.
+
+Host the file on your web server or deploy it using a platform like GitHub Pages, Netlify, or Vercel for free.
+
+
+Would you like help setting up deployment or adding analytics?
+
